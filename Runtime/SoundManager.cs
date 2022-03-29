@@ -8,7 +8,7 @@ namespace ASmallGame.Sound
     {
         void Start()
         {
-        
+            Debug.Log("Start");
         }
 
         void Update()
