@@ -1,0 +1,20 @@
+{
+  "name": "com.asg.soundmanager",
+  "version": "1.0.0",
+  "displayName": "A Small SoundManager",
+  "description": "This is a Soundmanager",
+  "unity": "2020.3",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+ "keywords": [
+    "keyword1",
+    "keyword2",
+    "keyword3"
+  ],
+  "author": {
+    "name": "A Small Game",
+    "email": "info@asmallgame.com",
+    "url": "https://www.asmallgame.com"
+  }
+}
