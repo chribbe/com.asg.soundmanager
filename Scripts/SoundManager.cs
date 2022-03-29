@@ -1,11 +1,16 @@
-namespace ASmallGame.Sound
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace ASmallGame.Sounds
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+  
 
     public class SoundManager : MonoBehaviour
     {
+        public bool DebugDisplay;
+        public SoundBank[] SoundBanks;
+
         void Start()
         {
             Debug.Log("Start");
