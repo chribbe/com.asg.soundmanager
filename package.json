@@ -1,6 +1,6 @@
 {
   "name": "com.asg.soundmanager",
-  "version": "1.0.0",
+  "version": "1.0.0.1",
   "displayName": "A Small SoundManager",
   "description": "This is a Soundmanager",
   "unity": "2020.3",
