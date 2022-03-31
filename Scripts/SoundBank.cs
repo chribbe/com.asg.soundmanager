@@ -8,7 +8,7 @@ namespace ASmallGame.Sounds
     [CreateAssetMenu(fileName = "SoundBank", menuName = "SoundManager/SoundBank", order = 1)]
     public class SoundBank : ScriptableObject
     {
-        public AudioMixerGroup mixerGroup;
+        public AudioMixerGroup DefaultMixerGroup;
         public Sound[] sounds;
 
         private void OnEnable()
