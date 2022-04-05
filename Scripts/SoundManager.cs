@@ -65,6 +65,11 @@ namespace ASmallGame.Sounds
             options = MMSoundManagerPlayOptions.Default;
             options.Volume = sound.Volume;// + (Random.Range(sound.Volume, sound.Volume + sound.VolumeRandomness) - sound.VolumeRandomness / 2);
 
+            if(sound.UsePosition && location != null)
+            {
+                options.Location = location.position;
+
+            }
             if (sound.PitchRandomness > 0)
             {
                 options.Pitch = Random.Range(sound.Pitch, sound.Pitch + sound.PitchRandomness) - sound.PitchRandomness / 2;

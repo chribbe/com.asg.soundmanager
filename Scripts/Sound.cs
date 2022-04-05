@@ -59,9 +59,7 @@ namespace ASmallGame.Sounds
       
             if (Time.time - _lastPlayedTime < CoolDown) return false; 
 
-            MMSoundManagerSoundPlayEvent.Trigger(GetClip(), options);
-            Debug.Log("TRIGGER EVENT");
-            
+            MMSoundManagerSoundPlayEvent.Trigger(GetClip(), options);            
             _lastPlayedTime = Time.time;
             return true;
         }
@@ -74,7 +72,6 @@ namespace ASmallGame.Sounds
 
             if (Time.time - _lastPlayedTime > CoolDown)
             {
-                Debug.Log("TRIGGER EVENT");
                 _lastPlayedTime = Time.time;
             }
         }
