@@ -16,6 +16,11 @@ namespace ASmallGame.Sounds
             Debug.Log("SoundManager Init");
             SoundManagerPlayEvent.Register(onSoundPlayEvent);
 
+
+            foreach (Sound s in SoundBank.sounds)
+            {
+                s.Reset();
+            }
         }
         void OnDisable()
         {
@@ -78,10 +83,15 @@ namespace ASmallGame.Sounds
             }
 
 
-            Debug.Log(options.Pitch);
+            if(sound.Delay > 0)
+            {
+                StartCoroutine(sound.WaitAndPlaySound(options,sound.Delay));
 
+            } else
+            {
+                sound.Play(options);
+            }
 
-            MMSoundManagerSoundPlayEvent.Trigger(sound.Clip, options);
         }
 
         void onSoundPlayEvent(string id, Transform location = null)
