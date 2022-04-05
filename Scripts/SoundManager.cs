@@ -16,40 +16,39 @@ namespace ASmallGame.Sounds
             Debug.Log("SoundManager Init");
             SoundManagerPlayEvent.Register(onSoundPlayEvent);
 
-
-            foreach (Sound s in SoundBank.sounds)
+            /*foreach (Sound s in SoundBank.sounds)
             {
                 s.Reset();
-            }
+            }*/
         }
         void OnDisable()
         {
             SoundManagerPlayEvent.Unregister(onSoundPlayEvent);
         }
 
-        public void Play(string soundId,Transform location = null)
+        public void Play(string soundId, Transform location = null)
         {
             List<Sound> soundsToPlay = new List<Sound>();
 
 
-            foreach (Sound s in SoundBank.sounds)
+            foreach (SoundBankEntry soundEntry in SoundBank.sounds)
             {
-                if(s.Name == soundId)
+                Debug.Log("soundentry:" + soundEntry.TriggerName);
+                if (soundEntry.TriggerName == soundId || soundEntry.ExtraTriggerNames.Any(soundId.Contains))
                 {
-                    soundsToPlay.Add(s);
-                }
-
-                if (s.ExtraTriggerNames.Any(soundId.Contains))
-                {
-                    soundsToPlay.Add(s);
+                    foreach (Sound s in soundEntry.sounds)
+                    {
+                        soundsToPlay.Add(s);
+                    }
                 }
             }
 
-            if(soundsToPlay.Count > 0)
+
+            if (soundsToPlay.Count > 0)
             {
                 foreach (Sound s in soundsToPlay)
                 {
-                    playSound(s,location);
+                    playSound(s, location);
                 }
             }
             else
@@ -57,9 +56,12 @@ namespace ASmallGame.Sounds
                 Debug.Log("[SoundManager]Sound Not Found: " + soundId);
             }
         }
+    
 
         private void playSound(Sound sound, Transform location)
         {
+            Debug.Log("PLAY!!!");
+
             MMSoundManagerPlayOptions options;
             // we initialize it with the default values
             options = MMSoundManagerPlayOptions.Default;
@@ -87,7 +89,6 @@ namespace ASmallGame.Sounds
                 options.Volume = sound.Volume;
             }
 
-
             if(sound.Delay > 0)
             {
                 StartCoroutine(sound.WaitAndPlaySound(options,sound.Delay));
@@ -98,12 +99,35 @@ namespace ASmallGame.Sounds
             }
 
         }
-
         void onSoundPlayEvent(string id, Transform location = null)
         {
             Debug.Log("[SoundManager] Play Sound: " + id);
             Play(id, location);
         }
+
+
+        private static SoundManager _instance;
+        public static SoundManager Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+        private void Awake()
+        {
+            if (_instance != null && _instance != this)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+            else
+            {
+                _instance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
+        }
+
 
     }
 

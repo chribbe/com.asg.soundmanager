@@ -6,14 +6,17 @@ using UnityEngine.Audio;
 namespace ASmallGame.Sounds
 {
     [CreateAssetMenu(fileName = "SoundBank", menuName = "SoundManager/SoundBank", order = 1)]
+    [System.Serializable]
     public class SoundBank : ScriptableObject
     {
-        public Sound[] sounds;
+        public SoundBankEntry[] sounds;
 
-        private void OnEnable()
+       private void Reset()
         {
             if (sounds == null || sounds.Length == 0)
-                sounds = new Sound[1];
+                sounds = new SoundBankEntry[1];
+
+            Debug.Log("RESET?");
         }
 
     }

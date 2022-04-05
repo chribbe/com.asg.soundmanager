@@ -8,10 +8,9 @@ namespace ASmallGame.Sounds
     [System.Serializable]
     public class Sound
     {
-        public string Name;
+       // public string Name;
         public AudioClip Clip;
         public AudioClip[] ClipVariations;
-        public MMSoundManager.MMSoundManagerTracks Track;
 
         [Range(0f, 1.0f)]
         public float Volume = 1.0f;
@@ -24,13 +23,11 @@ namespace ASmallGame.Sounds
 
         public bool UsePosition;
 
-
         [Range(0f, 1.0f)]
         public float VolumeRandomness = 0.0f;
 
         [Range(0f, 1.0f)]
         public float PitchRandomness = 0.0f;
-        public string[] ExtraTriggerNames;
 
         private float _lastPlayedTime = 0.0f;
 
@@ -47,11 +44,6 @@ namespace ASmallGame.Sounds
             }
             
             return Clip;
-        }
-
-        public void Reset()
-        {
-            _lastPlayedTime = 0.0f;
         }
 
         public bool Play(MMSoundManagerPlayOptions options)
@@ -76,6 +68,15 @@ namespace ASmallGame.Sounds
             }
         }
 
+
+        public void Reset()
+        {
+            this.Volume = 1.0f;
+            this.Pitch = 1.0f;
+            this.PitchRandomness = 0.0f;
+            this.VolumeRandomness = 0.0f;
+            _lastPlayedTime = 0.0f;
+        }
 
     }
 }

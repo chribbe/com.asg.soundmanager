@@ -5,7 +5,7 @@ using UnityEditor;
 using ASmallGame.Sounds;
 
 
-    [CustomPropertyDrawer(typeof(Sound))]
+    [CustomPropertyDrawer(typeof(SoundBankEntry))]
     public class SoundDrawer : PropertyDrawer
     {
 
@@ -18,8 +18,11 @@ using ASmallGame.Sounds;
             if (GUI.Button(new Rect(position.xMin + 100f, position.yMax - 20f, position.width - 100f, 20f), "Test Play"))
             {
                 // do things
-                Sound sound = PropertyDrawerUtility.GetActualObjectForSerializedProperty<Sound>(fieldInfo, property);
-                SoundManagerPlayEvent.Trigger(sound.Name);
+                SoundBankEntry soundBankEntry = PropertyDrawerUtility.GetActualObjectForSerializedProperty<SoundBankEntry>(fieldInfo, property);
+                Debug.Log("TEST PLAY!");
+
+                Debug.Log(soundBankEntry.TriggerName);
+                SoundManagerPlayEvent.Trigger(soundBankEntry.TriggerName);
             }
         }
     }
