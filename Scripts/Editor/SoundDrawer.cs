@@ -5,7 +5,7 @@ using UnityEditor;
 using ASmallGame.Sounds;
 
 
-    [CustomPropertyDrawer(typeof(SoundBankEntry))]
+   // [CustomPropertyDrawer(typeof(Sound))]
     public class SoundDrawer : PropertyDrawer
     {
 
@@ -13,18 +13,21 @@ using ASmallGame.Sounds;
     {
         //GUI.backgroundColor = Color.cyan;
         EditorGUI.PropertyField(position, property, label, true);
-        if (property.isExpanded)
+      /*  if (property.isExpanded)
         {
-            if (GUI.Button(new Rect(position.xMin + 100f, position.yMax - 20f, position.width - 100f, 20f), "Test Play"))
+            if (GUI.Button(new Rect(position.xMin + 100f, position.yMax - 20f, position.width - 100f, 20f), "Set Default"))
             {
                 // do things
-                SoundBankEntry soundBankEntry = PropertyDrawerUtility.GetActualObjectForSerializedProperty<SoundBankEntry>(fieldInfo, property);
-                Debug.Log("TEST PLAY!");
+                //Sound sound = PropertyDrawerUtility.GetActualObjectForSerializedProperty<Sound>(fieldInfo, property);
+               /* property.Reset();
+                sound.Reset();
+                Debug.Log("SOUND");
 
-                Debug.Log(soundBankEntry.TriggerName);
-                SoundManagerPlayEvent.Trigger(soundBankEntry.TriggerName);
+                Debug.Log(fieldInfo.GetValue(property.serializedObject.targetObject));
+
+
             }
-        }
+        }*/
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
