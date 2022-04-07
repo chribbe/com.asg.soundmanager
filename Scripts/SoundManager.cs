@@ -33,7 +33,6 @@ namespace ASmallGame.Sounds
 
             foreach (SoundBankEntry soundEntry in SoundBank.sounds)
             {
-                Debug.Log("soundentry:" + soundEntry.TriggerName);
                 if (soundEntry.TriggerName == soundId || soundEntry.ExtraTriggerNames.Any(soundId.Contains))
                 {
                     foreach (Sound s in soundEntry.sounds)
@@ -60,7 +59,6 @@ namespace ASmallGame.Sounds
 
         private void playSound(Sound sound, Transform location)
         {
-            Debug.Log("PLAY!!!");
 
             MMSoundManagerPlayOptions options;
             // we initialize it with the default values
@@ -89,15 +87,8 @@ namespace ASmallGame.Sounds
                 options.Volume = sound.Volume;
             }
 
-            if(sound.Delay > 0)
-            {
-                StartCoroutine(sound.WaitAndPlaySound(options,sound.Delay));
-
-            } else
-            {
-                sound.Play(options);
-            }
-
+  
+            StartCoroutine(sound.WaitAndPlaySound(options,sound.Delay));
         }
         void onSoundPlayEvent(string id, Transform location = null)
         {
