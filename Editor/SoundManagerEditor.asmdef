@@ -1,0 +1,18 @@
+{
+    "name": "SoundManagerEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:71eadc26ffb904b09bb52c1e96ae9562"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
