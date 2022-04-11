@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using ASmallGame.Sounds;
 using MoreMountains.Tools;
+using Lofelt.NiceVibrations;
+
 namespace ASmallGame.Sounds
 {
     [System.Serializable]
@@ -31,6 +33,8 @@ namespace ASmallGame.Sounds
 
         private float _lastPlayedTime = 0.0f;
 
+        public HapticPatterns.PresetType Haptic = HapticPatterns.PresetType.None;
+
 
         public AudioClip GetClip()
         {
@@ -48,22 +52,44 @@ namespace ASmallGame.Sounds
 
         public bool Play(MMSoundManagerPlayOptions options)
         {
-      
-            if (Time.time - _lastPlayedTime < CoolDown) return false; 
 
-            MMSoundManagerSoundPlayEvent.Trigger(GetClip(), options);            
+            if (Time.time - _lastPlayedTime < CoolDown)
+            {
+                Debug.Log("[SOUNDMANAGER] COOL DOWN PREVENTED SOUND");
+                return false;
+            }
+
+            MMSoundManagerSoundPlayEvent.Trigger(GetClip(), options);
+            if (Haptic != HapticPatterns.PresetType.None)
+            {
+                PlayHaptic();
+            }
+
             _lastPlayedTime = Time.time;
             return true;
+        }
+
+        private void PlayHaptic()
+        {
+            if (Application.platform == RuntimePlatform.Android)
+                return;
+
+            HapticPatterns.PlayPreset(Haptic);
         }
 
         public IEnumerator WaitAndPlaySound(MMSoundManagerPlayOptions options,float delay) 
         {
             
             yield return new WaitForSeconds(delay);
-            MMSoundManagerSoundPlayEvent.Trigger(GetClip(), options);
-
             if (Time.time - _lastPlayedTime > CoolDown)
             {
+                MMSoundManagerSoundPlayEvent.Trigger(GetClip(), options);
+
+                if(Haptic != HapticPatterns.PresetType.None)
+                {
+                    PlayHaptic();
+                }
+
                 _lastPlayedTime = Time.time;
             }
         }
@@ -75,6 +101,11 @@ namespace ASmallGame.Sounds
             this.Pitch = 1.0f;
             this.PitchRandomness = 0.0f;
             this.VolumeRandomness = 0.0f;
+            _lastPlayedTime = 0.0f;
+        }
+
+        public void GetReady()
+        {
             _lastPlayedTime = 0.0f;
         }
 

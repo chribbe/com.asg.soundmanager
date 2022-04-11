@@ -11,6 +11,7 @@ namespace ASmallGame.Sounds
         public bool DebugDisplay;
         public SoundBank SoundBank;
 
+
         void OnEnable()
         {
             Debug.Log("SoundManager Init");
@@ -87,8 +88,13 @@ namespace ASmallGame.Sounds
                 options.Volume = sound.Volume;
             }
 
-  
-            StartCoroutine(sound.WaitAndPlaySound(options,sound.Delay));
+            if(sound.Delay > 0.0f)
+            {
+                StartCoroutine(sound.WaitAndPlaySound(options, sound.Delay));
+            } else
+            {
+                sound.Play(options);
+            }
         }
         void onSoundPlayEvent(string id, Transform location = null)
         {
@@ -117,6 +123,18 @@ namespace ASmallGame.Sounds
                 _instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
+
+
+            foreach (SoundBankEntry soundEntry in SoundBank.sounds)
+            {
+
+                foreach (Sound s in soundEntry.sounds)
+                {
+                    s.GetReady();
+                }
+
+            }
+
         }
 
 
